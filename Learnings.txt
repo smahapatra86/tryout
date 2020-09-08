@@ -1,0 +1,34 @@
+Logic
+------
+1. How authentication and authorization is implemented (e.g. policy)
+2. Understanding logic api solution
+3. Develop a dotnet core webjob and debug locally for different triggers (Time,Servicebus queue,Storage queue etc)
+
+General
+-------
+Sample app on asp.net core, understand how dependency injection works
+Understanding Asp.net core pipeline change (e.g. UseMiddleware,UseAuthentication etc)
+TypeScript continue
+React.js continue
+Service fabrics 
+Docker
+Kubernetes
+Differences in using the local clusters in Docker, Kubernetes & Service fabric
+Handons on different Azure services e.g. What is FrontDoor
+Dotnet core
+	a) Web application with EF core
+(cloud) Design Pattern
+Create nuget package and use it in other solution
+Dependency Injection
+Logging
+Teraform & HelmChart
+GraphQL (Microsoft Graph)
+
+Learnings
+---------
+ Debug a time triggered webjob locally
+ -------------------------------------
+ Assuming all the app setting configurations are added follow the below steps
+ 1) Add an environment variable as AzureWebJobsStorage. To add an environment variable we need to it to launchSettings.json in the environment variable section. Here is a sample value - "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=kmdlogicshareddev;AccountKey=ny8PosFnVmLXUO6lwkUxeWROMGi3m5HL7znWxzDLkFJ1JITGIRxc5D0d0ioAJhw0yj5gEjlP9IbRTE/wiOZGsw==;EndpointSuffix=core.windows.net"
+ 2) After adding this we should be able to debug by using breakpoint in the time triggered function. If it doesn't stop then wait for the time mentioned in the triggered. If webjob is scheduled to run to in every 15 minutes then wait for that much time for the debugger to stop. Or else change the CRON expression for a  less time interval.
+ 3) In the Output tab if you select the particular Web job - ASP.NET Core Web Server you can see the same log which you see the web job log on Azure. You can use this to refer to the time intervals when the job is going to run.
