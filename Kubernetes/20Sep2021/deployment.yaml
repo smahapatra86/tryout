@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mynginxsecond
+  labels:
+    app: mynginx    
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mynginx
+  template:
+    metadata:
+      labels:
+        app: mynginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx          
+        ports:
+        - containerPort: 8080

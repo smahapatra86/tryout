@@ -20,6 +20,12 @@ docker run -p 5434:5432 -v data-postgresql:/var/lib/postgresql/data --rm --name 
 6. Get ip address of an container - docker inspect --format "{{ .NetworkSettings.IPAddress }}" {container id or name}
 7. Check if container is linked to any other container -  docker inspect -f "{{ .HostConfig.Links }}" {container id or name}
 8. Check what network(s) your container is on - docker inspect {container id or name} -f "{{json .NetworkSettings.Networks }}"
+9. Run docker image interactively - 
+	Run the docker container first using command - docker run -d -p 5000:80 --rm --name anotherdemo anotherdemo
+	Then use docker exec command - docker exec -it anotherdemo /bin/bash
+	Please note that you can open bin/bash session even if in dockerfile you have only application dll as entrypoint and no other command specified
+	Kubernetes login to pod interactively - kubectl exec -it podname -- /bin/bash
+10. Run local docker image in kubernetes - Set the imagePullPolicy to Never in deployment.yaml
 
 Some issues
 -----------
@@ -28,6 +34,7 @@ Some issues
 	https://docs.docker.com/docker-for-windows/networking/
 	https://gist.github.com/MauricioMoraes/87d76577babd4e084cba70f63c04b07d 
 	docker run -d -p 5000:80 --rm --add-host=database:192.168.1.24 --name satyawebapp1 satyawebapp1 - This will not work
+3. Run a docker image in interactive mode and run the same image in kubernetes and try to login to pod interactively
 
 Base image
 ----------
@@ -102,3 +109,28 @@ Try outs
 		https://www.aaron-powell.com/posts/2019-04-04-debugging-dotnet-in-docker-with-vscode/
 	e) Understand more on Docker volume
 	f) Web application and postgres or any db in the same container - Not sure if we can do it. Need to check. Also need to check how we can build a docker image(writing a dockerfile) which will install postgres on a container rather than having the already provided image just having postgres
+	
+commands
+--------
+Docker
+------
+docker build -t imagename .
+docker run -d -p 5000:80 --rm --name containername imagetagname
+docker stop containername
+docker container ls
+docker images or docker image ls
+docker image rm imagename
+
+docker image tag dockerdemo:latest satyajit1986/myimages:dockerdemo
+docker push satyajit1986/myimages:dockerdemo
+
+
+docker exec -it containerID /bin/bash
+
+docker container ls --no-trunc
+
+Kubernetes
+----------
+check current context - kubectl config current-context
+list all context - kubectl config get-contexts
+change context name - kubectl config use-context {ContextName}

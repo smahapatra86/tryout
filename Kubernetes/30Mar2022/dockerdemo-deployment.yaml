@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dockerdemometadata
+  labels:
+    app: dockerdemo  
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dockerdemo
+  template:
+    metadata:
+      labels:
+        app: dockerdemo
+    spec:
+      containers:
+      - name: dockerdemo
+        image: dockerdemo
+        imagePullPolicy: Never        
+        ports:
+        - containerPort: 80
