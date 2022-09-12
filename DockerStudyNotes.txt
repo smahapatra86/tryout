@@ -98,6 +98,10 @@ Try outs
 	https://medium.com/front-end-weekly/net-core-web-api-with-docker-compose-postgresql-and-ef-core-21f47351224f
 	i) Deploy dockerized local application to Azure using Devops and configure CI/CD
 	
+2. Kubernetes
+	a) Deploy web application to local cluster and access from outside
+	b) Deploy web application with database to cluster, configure configMaps and secrets to store db connection string, username, password
+	
 	Extras
 	a) In Docker Desktop, using linux container, create a docker image to run a dotnet core application
 	b) Create a docker image where we can use the command prompt of the image and check directory structure by running the container in interactive mode and also understand docker command COPY . ./ or COPY . . etc
@@ -115,6 +119,7 @@ commands
 Docker
 ------
 docker build -t imagename .
+docker build -f {Dockerfile path} -t {Image tag} .
 docker run -d -p 5000:80 --rm --name containername imagetagname
 docker stop containername
 docker container ls
@@ -134,3 +139,4 @@ Kubernetes
 check current context - kubectl config current-context
 list all context - kubectl config get-contexts
 change context name - kubectl config use-context {ContextName}
+Apply yaml configuration files - kubectl apply -f {FileName} 

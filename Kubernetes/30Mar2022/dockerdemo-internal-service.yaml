@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dockerdemoservice
+spec:
+   #matchLabels are not supported by Service (https://medium.com/@zwhitchcox/matchlabels-labels-and-selectors-explained-in-detail-for-beginners-d421bdd05362)
+  selector:
+    app: dockerdemo
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

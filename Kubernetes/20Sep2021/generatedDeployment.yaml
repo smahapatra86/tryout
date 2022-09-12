@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "2"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"mynginx"},"name":"mynginxsecond","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"mynginx"}},"template":{"metadata":{"labels":{"app":"mynginx"}},"spec":{"containers":[{"image":"nginx","name":"nginx","ports":[{"containerPort":8080}]}]}}}}
+  creationTimestamp: "2021-09-24T10:27:04Z"
+  generation: 2
+  labels:
+    app: mynginx
+  name: mynginxsecond
+  namespace: default
+  resourceVersion: "686"
+  uid: 32aeddd4-24f0-49e1-a48c-b8d1955e17ac
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: mynginx
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: mynginx
+    spec:
+      containers:
+      - image: nginx
+        imagePullPolicy: Always
+        name: nginx
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2021-09-24T10:27:19Z"
+    lastUpdateTime: "2021-09-24T10:27:19Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2021-09-24T10:27:04Z"
+    lastUpdateTime: "2021-09-24T10:28:34Z"
+    message: ReplicaSet "mynginxsecond-6844c59bbc" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 2
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1
