@@ -140,3 +140,25 @@ check current context - kubectl config current-context
 list all context - kubectl config get-contexts
 change context name - kubectl config use-context {ContextName}
 Apply yaml configuration files - kubectl apply -f {FileName} 
+
+Kubernetes connect using kubctl
+Go to the cluser in Azure and select "Connect" and run the commands to login
+
+commands
+--------
+az account set --subscription 7940b735-ab20-47f7-9edc-c24ed0336473
+az aks get-credentials --resource-group kmd-logic-infra-shareddev-rg --name kmd-logic-shareddev-aks
+
+kubectl get namespaces
+​kubectl get pods -n namespace
+kubectl get all -n namespace
+​kubectl describe pod pod1 -n namespace
+​kubectl logs pod1 -n namespace1
+
+delete namespace - kubectl delete namespace kmd-logic-sms-35981e70732
+
+login to pod interactively - kubectl -n kmd-logic-document-generation exec -it pod/kmd-logic-document-generation-dc584cc69-w6l78 -- /bin/bash
+after connecting to pod, type env to see the environment variables
+
+Generate yaml content of a deployment - kubectl get deployment mynginxsecond -o=yaml > generatedDeployment.yaml
+Delete a deployment or service using the yaml which was used to create it - kubectl delete -f deployment.yml OR kubectl delete -f service.yaml
